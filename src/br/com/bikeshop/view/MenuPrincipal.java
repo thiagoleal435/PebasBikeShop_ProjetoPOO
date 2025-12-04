@@ -40,46 +40,47 @@ public class MenuPrincipal extends JFrame {
         criarMenu();
     }
 
-    private void criarMenu() {
+	private void criarMenu() {
         JMenuBar menuBar = new JMenuBar();
 
-        // --- MENU CADASTROS ---
+        // Menu Cadastros (Já existente)
         JMenu menuCadastros = new JMenu("Cadastros");
-        
-        // Item: Clientes
         JMenuItem itemCliente = new JMenuItem("Clientes");
-        itemCliente.addActionListener(e -> {
-            // Abre a tela de lista de clientes que fizemos antes
-            new TelaListaClientes().setVisible(true);
-            // Não fechamos o menu principal, apenas abrimos a outra tela por cima
-        });
-
-        // Item: Produtos
-        JMenuItem itemProduto = new JMenuItem("Produtos / Bicicletas");
-        itemProduto.addActionListener(e -> {
-        	new TelaListaProdutos().setVisible(true);
-             // Futuramente: new TelaListaProdutos().setVisible(true);
-        });
-
+        itemCliente.addActionListener(e -> new TelaListaClientes().setVisible(true));
+        JMenuItem itemProduto = new JMenuItem("Produtos / Estoque");
+        itemProduto.addActionListener(e -> new TelaListaProdutos().setVisible(true));
         menuCadastros.add(itemCliente);
         menuCadastros.add(itemProduto);
 
-        // --- MENU VENDAS (Fase 4) ---
+        // --- MENU VENDAS (Atualizado) ---
         JMenu menuVendas = new JMenu("Vendas");
+        
         JMenuItem itemNovaVenda = new JMenuItem("Nova Venda");
-        menuVendas.add(itemNovaVenda);
+        itemNovaVenda.addActionListener(e -> new TelaSelecaoVenda().setVisible(true));
 
-        // --- MENU SAIR ---
+        // NOVO ITEM
+        JMenuItem itemHistorico = new JMenuItem("Histórico de Vendas");
+        itemHistorico.addActionListener(e -> new TelaHistoricoVendas().setVisible(true));
+
+        // Item Métricas (AGORA IMPLEMENTADO)
+        JMenuItem itemMetricas = new JMenuItem("Métricas / Relatórios");
+        itemMetricas.addActionListener(e -> {
+            new TelaMetricas().setVisible(true);
+        });
+
+        menuVendas.add(itemNovaVenda);
+        menuVendas.add(itemHistorico); // Adiciona o histórico
+        menuVendas.add(itemMetricas);
+
+        // Menu Sair
         JMenu menuSair = new JMenu("Sair");
-        JMenuItem itemSair = new JMenuItem("Fechar Sistema");
+        JMenuItem itemSair = new JMenuItem("Sair");
         itemSair.addActionListener(e -> System.exit(0));
         menuSair.add(itemSair);
 
-        // Adiciona os menus na barra
         menuBar.add(menuCadastros);
         menuBar.add(menuVendas);
         menuBar.add(menuSair);
-
         setJMenuBar(menuBar);
     }
 
