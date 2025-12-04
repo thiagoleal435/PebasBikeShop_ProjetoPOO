@@ -7,15 +7,17 @@ public abstract class Produto implements Serializable {
 	
 	protected String codigo;
     protected String nome;
+    protected String descricao;
     protected double preco;
     protected int estoqueAtual;
     protected int estoqueMinimo; // Cada produto tem o seu alerta
     
     // Contructor
-    public Produto(String codigo, String nome, double preco, int estoqueMinimo) {
+    public Produto(String codigo, String nome, double preco, int estoqueMinimo, String descricao) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
+		this.descricao = descricao;
 		this.preco = preco;
 		this.estoqueMinimo = estoqueMinimo;
 		this.estoqueAtual = 0;
@@ -38,6 +40,17 @@ public abstract class Produto implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 
 	public double getPreco() {
 		return preco;

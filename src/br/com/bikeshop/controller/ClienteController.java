@@ -53,4 +53,32 @@ public class ClienteController {
             GerenciadorDados.salvar(this.clientes, ARQUIVO_CLIENTES);
         }
     }
+    
+    public boolean atualizar(int indice, String nome, String cpf, String telefone) {
+        if (indice >= 0 && indice < this.clientes.size()) {
+            // Validação simples
+            if (nome.isEmpty() || cpf.isEmpty()) {
+                return false;
+            }
+
+            // Pega o cliente existente e muda os dados (precisa dos Setters no Model!)
+            Cliente c = this.clientes.get(indice);
+            c.setNome(nome);
+            c.setCpf(cpf);
+            c.setTelefone(telefone);
+
+            // Salva a lista atualizada no arquivo
+            GerenciadorDados.salvar(this.clientes, ARQUIVO_CLIENTES);
+            return true;
+        }
+        return false;
+    }
+    
+    // Método auxiliar para pegar um cliente específico (usaremos para preencher a tela de edição)
+    public Cliente getCliente(int indice) {
+        if (indice >= 0 && indice < this.clientes.size()) {
+            return this.clientes.get(indice);
+        }
+        return null;
+    }
 }
