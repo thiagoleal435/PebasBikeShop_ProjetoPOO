@@ -1,110 +1,89 @@
-📘 Sistema de Gestão para Loja de Bicicletas
-Controle de produtos, clientes, vendas e estoque – com interface gráfica em Java Swing
-🛒 Sobre o Projeto
+# 🚲 Peba's Bike Shop - Sistema de Gestão
 
-Este repositório contém o desenvolvimento de um Sistema de Gestão para uma Loja de Bicicletas, criado para simular o funcionamento de um comércio especializado na venda de bicicletas e acessórios.
-O sistema foi desenvolvido utilizando Java, com:
+> "Qualidade, Performance e estilo Peba de ser."
 
-Arquitetura em camadas
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)
+![Swing](https://img.shields.io/badge/Swing-GUI-orange?style=for-the-badge)
 
-Persistência de dados via arquivos (serialização)
+## 📖 Sobre o Projeto
 
-Interface gráfica feita em Java Swing
+Este projeto foi desenvolvido como requisito avaliativo para a disciplina de **Programação Orientada a Objetos (POO)**. 
 
-Operações completas de CRUD
+O sistema consiste em uma aplicação Desktop em **Java Swing** para o gerenciamento completo de uma loja de bicicletas. O foco principal foi a implementação de uma arquitetura **MVC (Model-View-Controller)** robusta, utilizando persistência de dados em arquivos binários (Serialização) para simular um banco de dados local.
 
-Módulo de vendas com emissão de fatura
+---
 
-Controle de estoque com geração de alertas
+## 📸 Screenshots
 
-🚴 Contexto da Loja
+| Tela Inicial | Gestão de Estoque |
+|:---:|:---:|
+| <img src="caminho/para/print_home.png" width="400"> | <img src="caminho/para/print_estoque.png" width="400"> |
 
-A loja fictícia comercializa diversos tipos de bicicletas:
+| Nova Venda | Comprovante Fiscal |
+|:---:|:---:|
+| <img src="caminho/para/print_venda.png" width="400"> | <img src="caminho/para/print_fatura.png" width="400"> |
 
-Mountain Bike
+---
 
-Bicicleta Urbana
+## 🚀 Funcionalidades Principais
 
-Bicicleta Elétrica
+### 📦 Gestão de Estoque
+* **Cadastro Polimórfico:** Diferenciação entre **Bicicletas** (com atributos como Aro, Material, Faixa Etária, Uso) e **Peças** (Quadros, Rodas, etc).
+* **Controle de Estoque:** Alertas visuais e bloqueios quando o estoque atinge o nível mínimo.
+* **Código Automático:** Geração sequencial de IDs para produtos.
 
-Bicicleta Infantil
+### 💰 Sistema de Vendas
+* **Carrinho de Compras:** Seleção de cliente e produtos com verificação de disponibilidade em tempo real.
+* **Regras de Negócio:**
+    * Desconto automático de **10% para pagamentos via Pix**.
+    * Validação de datas (impede vendas com datas futuras).
+* **Faturamento:** Geração de comprovante fiscal visual e salvamento de histórico em arquivos `.txt` individuais.
 
-Speed/Road bikes
+### 👥 Gestão de Clientes
+* CRUD completo (Criar, Ler, Atualizar, Deletar) de clientes.
+* Persistência automática dos dados.
 
-Além de acessórios e componentes.
-Cada produto possui características específicas do setor, como tamanho de aro, tipo de quadro e categoria.
+### 📊 Métricas e Relatórios
+* Dashboard com indicadores de desempenho:
+    * Total de vendas do mês.
+    * Produto mais vendido (Curva ABC).
+    * Melhor cliente (baseado no volume de compras).
+    * Dia com maior faturamento.
+* Histórico detalhado com opção de re-impressão de faturas e estorno de vendas (devolução ao estoque).
 
-O sistema permite registrar produtos, clientes, vendas, emitir faturas, controlar estoque e gerar relatórios de desempenho da loja.
+---
 
-🧩 Funcionalidades
-🔧 Gestão de Produtos (CRUD)
+## 🛠️ Arquitetura e Tecnologias
 
-Cadastrar novos produtos
+O projeto segue estritamente o padrão **MVC**:
 
-Editar informações
+* **Model:** Classes POJO (`Produto`, `Bicicleta`, `Cliente`, `Venda`) implementando `Serializable`.
+* **View:** Telas construídas com `javax.swing` (`JFrame`, `JDialog`, `JPanel`), utilizando layouts responsivos (`BorderLayout`, `GridBagLayout`).
+* **Controller:** Lógica de negócio, validações e orquestração entre a tela e os dados (`VendaController`, `RelatorioController`, etc).
+* **DAO (Data Access Object):** Classe `GerenciadorDados` responsável por ler e escrever os arquivos `.dat`.
 
-Excluir produtos
+---
 
-Consultar e listar produtos
+## 🔧 Como Executar
 
-Definir estoque mínimo individual
+Pré-requisitos: **Java JDK 17+** e **Eclipse IDE** (ou outra IDE Java).
 
-Alerta automático quando o estoque fica abaixo do mínimo
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/SEU-USUARIO/PebasBikeShop_ProjetoPOO.git](https://github.com/SEU-USUARIO/PebasBikeShop_ProjetoPOO.git)
+    ```
+2.  **Importe no Eclipse:**
+    * `File` > `Import` > `General` > `Projects from Folder or Archive`.
+    * Selecione a pasta clonada.
+3.  **Configuração:**
+    * Certifique-se de que a imagem de fundo (`fundo.jpg`) está na pasta `src/imagens` (ou no `Build Path` correto).
+4.  **Execute:**
+    * Abra a classe `src/br/com/bikeshop/app/Main.java`.
+    * Execute como Java Application.
 
-👥 Gestão de Clientes (CRUD)
+---
 
-Cadastrar clientes
+## 👨‍💻 Autores
 
-Alterar dados
-
-Excluir clientes
-
-Consultar e listar
-
-🛒 Gestão de Vendas
-
-Registrar venda associando cliente + itens de compra
-
-Atualizar estoque automaticamente
-
-Emitir fatura da venda
-
-Registrar data e valor total
-
-📊 Relatórios e Estatísticas
-
-Total de vendas no mês
-
-Produto mais vendido
-
-Produto menos vendido
-
-Melhor cliente
-
-Dia com maior número de vendas
-
-💾 Persistência de Dados
-
-Utilização de arquivos com serialização Java
-
-Sem uso de banco de dados
-
-🎨 Interface Gráfica (Java Swing)
-
-Layout simples e funcional
-
-Telas para produtos, clientes e vendas
-
-Menus e navegação intuitiva
-
-🏗 Arquitetura em Camadas
-
-Model – entidades e lógica básica
-
-DAO/Repository – persistência em arquivos
-
-Service – regras de negócio
-
-Controller – integração entre view e lógica
-
-View – interface Swing
+*
