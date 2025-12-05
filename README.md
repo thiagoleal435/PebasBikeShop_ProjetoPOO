@@ -18,11 +18,11 @@ O sistema consiste em uma aplicação Desktop em **Java Swing** para o gerenciam
 
 | Tela Inicial | Gestão de Estoque |
 |:---:|:---:|
-| <img src="caminho/para/print_home.png" width="400"> | <img src="caminho/para/print_estoque.png" width="400"> |
+| <img src="/imagens/print_home.png" width="400"> | <img src="/imagens/print_estoque.png" width="400"> |
 
 | Nova Venda | Comprovante Fiscal |
 |:---:|:---:|
-| <img src="caminho/para/print_venda.png" width="400"> | <img src="caminho/para/print_fatura.png" width="400"> |
+| <img src="/imagens/print_venda.png" width="400"> | <img src="/imagens/print_fatura.png" width="400"> |
 
 ---
 
@@ -86,4 +86,11 @@ Pré-requisitos: **Java JDK 17+** e **Eclipse IDE** (ou outra IDE Java).
 
 ## 👨‍💻 Autores
 
-*
+* **Thiago Leal** - *Desenvolvedor Backend & Frontend* - [GitHub](https://github.com/thiagoleal435)
+* **Emerson Silva** - *Desenvolvedor Backend & Frontend* - [GitHub](https://github.com/emersontecn)
+
+---
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT - sinta-se à vontade para usar e modificar.
