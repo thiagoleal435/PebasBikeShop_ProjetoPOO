@@ -13,11 +13,13 @@ public class TelaCadastroProduto extends JDialog {
 
     private JComboBox<String> cbTipo;
     private JTextField txtCodigo, txtDescricao, txtPreco, txtEstoque, txtEstoqueMin;
-    
-    // ATENÇÃO: txtMaterial FOI REMOVIDO PARA EVITAR O ERRO NULLPOINTER
     private JTextField txtAro, txtTamanhoQuadro;
     private JComboBox<String> cbMaterial; 
     
+    // NOVOS COMPONENTES
+    private JComboBox<String> cbFaixaEtaria;
+    private JComboBox<String> cbFinalidade;
+
     private ProdutoController controller;
     private int indiceEdicao;
 
@@ -27,12 +29,12 @@ public class TelaCadastroProduto extends JDialog {
         this.indiceEdicao = indice;
         
         setTitle(produto == null ? "Novo Produto" : "Editar Produto");
-        setSize(500, 550);
+        setSize(550, 650); // Aumentei para caber os campos
         setLocationRelativeTo(parent);
         setLayout(new BorderLayout());
         
         JPanel painelForm = new JPanel();
-        painelForm.setLayout(new GridLayout(10, 2, 10, 10));
+        painelForm.setLayout(new GridLayout(12, 2, 10, 10)); // Aumentei linhas para 12
         painelForm.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         // 1. Tipo
@@ -50,21 +52,18 @@ public class TelaCadastroProduto extends JDialog {
 
         // 3. Descrição
         painelForm.add(new JLabel("Descrição/Nome:"));
-        txtDescricao = new JTextField(); 
-        painelForm.add(txtDescricao);
+        txtDescricao = new JTextField(); painelForm.add(txtDescricao);
 
         // 4. Preço
         painelForm.add(new JLabel("Preço (R$):"));
-        txtPreco = new JTextField(); 
-        painelForm.add(txtPreco);
+        txtPreco = new JTextField(); painelForm.add(txtPreco);
 
         // 5. Estoque
         painelForm.add(new JLabel("Estoque Atual:"));
-        txtEstoque = new JTextField("0"); 
-        painelForm.add(txtEstoque);
+        txtEstoque = new JTextField("0"); painelForm.add(txtEstoque);
 
         // 6. Estoque Mínimo
-        painelForm.add(new JLabel("Estoque Mínimo (Referência):"));
+        painelForm.add(new JLabel("Estoque Mínimo:"));
         txtEstoqueMin = new JTextField("5");
         txtEstoqueMin.setEditable(false);
         txtEstoqueMin.setBackground(new Color(245, 245, 220));
@@ -72,8 +71,7 @@ public class TelaCadastroProduto extends JDialog {
 
         // 7. Aro
         painelForm.add(new JLabel("Aro (Bikes/Rodas):"));
-        txtAro = new JTextField(); 
-        painelForm.add(txtAro);
+        txtAro = new JTextField(); painelForm.add(txtAro);
 
         // 8. Material
         painelForm.add(new JLabel("Material (Bikes/Quadros):"));
@@ -83,62 +81,61 @@ public class TelaCadastroProduto extends JDialog {
 
         // 9. Tamanho
         painelForm.add(new JLabel("Tamanho (Quadro/Bike):"));
-        txtTamanhoQuadro = new JTextField(); 
-        painelForm.add(txtTamanhoQuadro);
-        
+        txtTamanhoQuadro = new JTextField(); painelForm.add(txtTamanhoQuadro);
+
+        // 10. Faixa Etária (NOVO)
+        painelForm.add(new JLabel("Faixa Etária (Bikes):"));
+        String[] faixas = {"Adulto", "Infantil"};
+        cbFaixaEtaria = new JComboBox<>(faixas);
+        painelForm.add(cbFaixaEtaria);
+
+        // 11. Finalidade (NOVO)
+        painelForm.add(new JLabel("Finalidade (Bikes):"));
+        String[] fins = {"Urbano", "Rural/MTB", "Estrada"};
+        cbFinalidade = new JComboBox<>(fins);
+        painelForm.add(cbFinalidade);
+
         add(painelForm, BorderLayout.CENTER);
 
         // Botões
         JPanel painelBotoes = new JPanel();
         painelBotoes.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.addActionListener(e -> dispose());
         painelBotoes.add(btnCancelar);
-
         JButton btnSalvar = new JButton("Salvar");
         btnSalvar.setPreferredSize(new Dimension(100, 30));
         btnSalvar.addActionListener(e -> salvar());
         painelBotoes.add(btnSalvar);
-
         add(painelBotoes, BorderLayout.SOUTH);
 
         // Listeners
         cbTipo.addActionListener(e -> atualizarCamposVisuais());
 
-        if (produto != null) {
-            preencherCampos(produto);
-        } else {
-            txtCodigo.setText(controller.gerarProximoCodigo());
-        }
+        if (produto != null) preencherCampos(produto);
+        else txtCodigo.setText(controller.gerarProximoCodigo());
         
-        // Garante que a visualização inicial esteja correta
         atualizarCamposVisuais();
     }
 
     private void atualizarCamposVisuais() {
         String tipo = (String) cbTipo.getSelectedItem();
-        
         boolean isBike = "Bicicleta".equals(tipo);
         boolean isQuadro = "Quadro".equals(tipo);
         boolean isRoda = "Roda".equals(tipo);
 
-        // --- LÓGICA CORRIGIDA ---
-
-        // 1. ARO: Habilitado apenas para Bicicleta OU Roda
         txtAro.setEnabled(isBike || isRoda);
         if (!txtAro.isEnabled()) txtAro.setText("");
 
-        // 2. MATERIAL: Habilitado apenas para Bicicleta OU Quadro
         cbMaterial.setEnabled(isBike || isQuadro);
-
-        // 3. TAMANHO: Habilitado apenas para Bicicleta OU Quadro
-        // (Freio, Selim, etc, ficarão desabilitados aqui)
-        txtTamanhoQuadro.setEnabled(isBike || isQuadro);
-        if (!txtTamanhoQuadro.isEnabled()) txtTamanhoQuadro.setText("");
         
-        // Se for Roda, bloqueia Tamanho (pois Roda usa Aro)
+        txtTamanhoQuadro.setEnabled(isBike || isQuadro);
         if (isRoda) txtTamanhoQuadro.setEnabled(false);
+        if (!txtTamanhoQuadro.isEnabled()) txtTamanhoQuadro.setText("");
+
+        // NOVOS CAMPOS: Só habilitam para Bike
+        cbFaixaEtaria.setEnabled(isBike);
+        cbFinalidade.setEnabled(isBike);
     }
 
     private void preencherCampos(Produto p) {
@@ -154,54 +151,41 @@ public class TelaCadastroProduto extends JDialog {
             txtAro.setText(String.valueOf(b.getAro()));
             cbMaterial.setSelectedItem(b.getMaterial());
             txtTamanhoQuadro.setText(b.getTamanhoQuadro());
+            // Preenche novos campos
+            cbFaixaEtaria.setSelectedItem(b.getFaixaEtaria());
+            cbFinalidade.setSelectedItem(b.getFinalidade());
             
         } else if (p instanceof Peca) {
             Peca peca = (Peca) p;
-            String categoria = peca.getCategoria();
-            cbTipo.setSelectedItem(categoria);
-            
-            // Lógica de recuperação dos dados
-            if ("Quadro".equals(categoria)) {
+            cbTipo.setSelectedItem(peca.getCategoria());
+            if ("Quadro".equals(peca.getCategoria())) {
                 txtTamanhoQuadro.setText(peca.getMedida());
-                if (peca.getMaterial() != null) {
-                    cbMaterial.setSelectedItem(peca.getMaterial());
-                }
-            } 
-            else if ("Roda".equals(categoria)) {
+                if(peca.getMaterial() != null) cbMaterial.setSelectedItem(peca.getMaterial());
+            } else if ("Roda".equals(peca.getCategoria())) {
                 txtAro.setText(peca.getMedida());
-            } 
-            // Outras peças não usam esses campos, então não preenchemos nada específico
+            } else {
+                txtTamanhoQuadro.setText(peca.getMedida());
+            }
         }
     }
 
     private void salvar() {
         try {
-            int estoqueAtual = Integer.parseInt(txtEstoque.getText());
-            int estoqueMinimo = Integer.parseInt(txtEstoqueMin.getText());
-
-            if (estoqueAtual <= estoqueMinimo) {
-                JOptionPane.showMessageDialog(this, 
-                    "REGRA DE NEGÓCIO:\nO Estoque Atual (" + estoqueAtual + ") " +
-                    "deve ser MAIOR que o Estoque Mínimo (" + estoqueMinimo + ").",
-                    "Aviso", JOptionPane.WARNING_MESSAGE);
+            int estoque = Integer.parseInt(txtEstoque.getText());
+            int minimo = Integer.parseInt(txtEstoqueMin.getText());
+            if (estoque <= minimo) {
+                JOptionPane.showMessageDialog(this, "Estoque deve ser maior que o mínimo ("+minimo+").", "Erro", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Erro: Verifique os números do estoque.");
-            return;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro nos números."); return;
         }
 
         boolean sucesso = controller.salvarOuAtualizar(
-            indiceEdicao,
-            (String) cbTipo.getSelectedItem(),
-            txtCodigo.getText(),
-            txtDescricao.getText(),
-            txtPreco.getText(),
-            txtEstoque.getText(),
-            txtEstoqueMin.getText(),
-            txtAro.getText(),
-            (String) cbMaterial.getSelectedItem(),
-            txtTamanhoQuadro.getText()
+            indiceEdicao, (String) cbTipo.getSelectedItem(), txtCodigo.getText(), txtDescricao.getText(),
+            txtPreco.getText(), txtEstoque.getText(), txtEstoqueMin.getText(), txtAro.getText(),
+            (String) cbMaterial.getSelectedItem(), txtTamanhoQuadro.getText(),
+            (String) cbFaixaEtaria.getSelectedItem(), (String) cbFinalidade.getSelectedItem() // Novos params
         );
 
         if (sucesso) {

@@ -34,6 +34,8 @@ public class TelaSelecaoVenda extends JFrame {
         modeloTabela.addColumn("Aro");        // Novo
         modeloTabela.addColumn("Material");   // Novo
         modeloTabela.addColumn("Tam. Quadro");// Novo
+        modeloTabela.addColumn("Faixa Etária"); // Novo
+        modeloTabela.addColumn("Uso");
 
         tabela = new JTable(modeloTabela);
         
@@ -73,7 +75,7 @@ public class TelaSelecaoVenda extends JFrame {
         modeloTabela.setRowCount(0);
         
         for (Produto p : controller.listarProdutos()) {
-            String tipo, aroStr = "-", materialStr = "-", tamStr = "-";
+            String tipo, aroStr = "-", materialStr = "-", tamStr = "-", faixaStr="-", usoStr="-";
 
             // Lógica para preencher os detalhes (igual à lista de estoque)
             if (p instanceof Bicicleta) {
@@ -82,6 +84,8 @@ public class TelaSelecaoVenda extends JFrame {
                 aroStr = String.valueOf(b.getAro());
                 materialStr = b.getMaterial();
                 tamStr = b.getTamanhoQuadro();
+                faixaStr = b.getFaixaEtaria(); // Novo
+                usoStr = b.getFinalidade();
             } else {
                 Peca peca = (Peca) p;
                 tipo = peca.getCategoria();
@@ -97,15 +101,9 @@ public class TelaSelecaoVenda extends JFrame {
             }
             
             modeloTabela.addRow(new Object[]{
-                p.getCodigo(),
-                tipo,
-                p.getDescricao(),
-                String.format("R$ %.2f", p.getPreco()),
-                p.getEstoqueAtual(),
-                aroStr,
-                materialStr,
-                tamStr
-            });
+                    p.getCodigo(), tipo, p.getDescricao(), String.format("R$ %.2f", p.getPreco()),
+                    p.getEstoqueAtual(), aroStr, materialStr, tamStr, faixaStr, usoStr
+                });
         }
     }
 }

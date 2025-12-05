@@ -4,19 +4,21 @@ public class Bicicleta extends Produto {
     private static final long serialVersionUID = 1L;
 
     // Atributos exclusivos de bicicleta
-    private String cor;
     private int aro;
     private String material;
     private String tamanhoQuadro;
+    private String faixaEtaria;
+    private String finalidade;
 
     // O construtor precisa receber os dados do Pai (Produto) + os do Filho (Bicicleta)
     public Bicicleta(String codigo, String descricao, double preco, int estoqueMinimo, 
-                     String cor, int aro, String material, String tamanhoQuadro) {
+                     int aro, String material, String tamanhoQuadro, String faixaEtaria, String finalidade) {
         super(codigo, descricao, preco, estoqueMinimo, descricao); // Passa para a classe pai
-        this.cor = cor;
         this.aro = aro;
         this.material = material;
         this.tamanhoQuadro = tamanhoQuadro;
+        this.faixaEtaria = faixaEtaria;
+        this.finalidade = finalidade;
     }
     
     // toString ajuda muito na hora de debugar ou mostrar em combobox
@@ -26,12 +28,14 @@ public class Bicicleta extends Produto {
     }
 
     // Getters e Setters específicos
-    public String getCor() { return cor; }
-    public void setCor(String cor) { this.cor = cor; }
     public int getAro() { return aro; }
     public void setAro(int aro) { this.aro = aro; }
     public String getMaterial() { return material; }
     public void setMaterial(String material) { this.material = material; }
     public String getTamanhoQuadro() { return tamanhoQuadro; }
     public void setTamanhoQuadro(String tamanhoQuadro) { this.tamanhoQuadro = tamanhoQuadro; }
+	public String getFaixaEtaria() { return faixaEtaria;}
+	public void setFaixaEtaria(String faixaEtaria) { this.faixaEtaria = faixaEtaria; }
+	public String getFinalidade() { return finalidade; }
+	public void setFinalidade(String finalidade) { this.finalidade = finalidade; }
 }

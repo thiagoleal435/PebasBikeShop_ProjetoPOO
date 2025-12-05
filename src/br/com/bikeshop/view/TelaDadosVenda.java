@@ -15,44 +15,59 @@ import java.util.List;
 public class TelaDadosVenda extends JDialog {
 
     private JComboBox<Cliente> cbClientes;
+    private JComboBox<String> cbPagamento; // Variável declarada
     private JTextField txtQtd, txtData;
     private VendaController controller;
     private Produto produto;
 
     public TelaDadosVenda(Window parent, VendaController controller, Produto produto) {
-        super(parent, Dialog.ModalityType.APPLICATION_MODAL); // Garante que bloqueie a tela de trás
+        super(parent, Dialog.ModalityType.APPLICATION_MODAL);
         this.controller = controller;
         this.produto = produto;
 
         setTitle("Finalizar Venda: " + produto.getDescricao());
-        setSize(400, 350);
+        setSize(400, 450); // Aumentei a altura para caber o novo campo
         setLocationRelativeTo(parent);
-        setLayout(new GridLayout(6, 2, 10, 10));
+        
+        // Layout de 7 linhas e 2 colunas
+        setLayout(new GridLayout(7, 2, 10, 10)); 
 
+        // 1. Cliente
         add(new JLabel("Cliente:"));
         cbClientes = new JComboBox<>();
         carregarClientes();
         add(cbClientes);
 
+        // 2. Preço
         add(new JLabel("Preço Unitário:"));
         JTextField txtPreco = new JTextField("R$ " + produto.getPreco());
         txtPreco.setEditable(false);
         add(txtPreco);
 
+        // 3. Quantidade
         add(new JLabel("Quantidade:"));
         txtQtd = new JTextField("1");
         add(txtQtd);
 
+        // 4. Data
         add(new JLabel("Data (dd/MM/yyyy):"));
         String hoje = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         txtData = new JTextField(hoje);
         add(txtData);
+        
+        // 5. Pagamento (O ERRO ESTAVA NA FALTA DISSO AQUI)
+        add(new JLabel("Pagamento:"));
+        String[] metodos = {"Dinheiro", "Cartão", "Pix"};
+        cbPagamento = new JComboBox<>(metodos); // Inicializa o ComboBox
+        cbPagamento.setToolTipText("Pix tem 10% de desconto!");
+        add(cbPagamento); // Adiciona na tela
 
+        // 6. Botões
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.addActionListener(e -> dispose());
         add(btnCancelar);
 
-        JButton btnFinalizar = new JButton("FINALIZAR VENDA");
+        JButton btnFinalizar = new JButton("FINALIZAR");
         btnFinalizar.setBackground(Color.ORANGE);
         btnFinalizar.addActionListener(e -> finalizarVenda());
         add(btnFinalizar);
@@ -67,38 +82,42 @@ public class TelaDadosVenda extends JDialog {
 
     private void finalizarVenda() {
         try {
-            // 1. Validação da Data (Requisito 2)
+            // 1. Validação da Data
             String dataTexto = txtData.getText();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            sdf.setLenient(false); // Não aceita datas como 32/01/2025
+            sdf.setLenient(false);
             
             Date dataVenda = sdf.parse(dataTexto);
-            Date dataHoje = new Date(); // Data com hora atual
+            Date dataHoje = new Date();
 
-            // Zera as horas para comparar apenas os dias
             SimpleDateFormat fmtSemHora = new SimpleDateFormat("yyyyMMdd");
             if (Integer.parseInt(fmtSemHora.format(dataVenda)) > Integer.parseInt(fmtSemHora.format(dataHoje))) {
                 JOptionPane.showMessageDialog(this, "ERRO: A data da venda não pode ser futura!", "Data Inválida", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // 2. Coleta dados normais
+            // 2. Coleta dados
             int qtd = Integer.parseInt(txtQtd.getText());
             Cliente cliente = (Cliente) cbClientes.getSelectedItem();
+            
+            // O ERRO OCORRIA AQUI PORQUE cbPagamento ERA NULL
+            String metodo = (String) cbPagamento.getSelectedItem(); 
 
             if (cliente == null) {
-                JOptionPane.showMessageDialog(this, "Selecione um cliente!");
-                return;
+                JOptionPane.showMessageDialog(this, "Selecione um cliente!"); return;
             }
 
             // 3. Realiza a Venda
-            Venda vendaFeita = controller.realizarVenda(cliente, produto, qtd, dataTexto);
+            Venda vendaFeita = controller.realizarVenda(cliente, produto, qtd, dataTexto, metodo);
             
-            // Sucesso! Pode fechar essa janela
             dispose(); 
 
-            // 4. Verificação de Estoque Mínimo (Requisito 3)
-            // O produto dentro de 'vendaFeita' já está com o estoque atualizado
+            // Alerta de Pix
+            if ("Pix".equals(metodo)) {
+                JOptionPane.showMessageDialog(null, "Desconto de 10% aplicado pelo PIX!", "Desconto", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            // 4. Verificação de Estoque
             int estoqueAtual = vendaFeita.getProduto().getEstoqueAtual();
             int estoqueMinimo = vendaFeita.getProduto().getEstoqueMinimo();
 
@@ -120,7 +139,10 @@ public class TelaDadosVenda extends JDialog {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Quantidade inválida.");
         } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage()); // Erro de estoque insuficiente
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace(); // Ajuda a ver outros erros no console se houver
+            JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage());
         }
     }
 }

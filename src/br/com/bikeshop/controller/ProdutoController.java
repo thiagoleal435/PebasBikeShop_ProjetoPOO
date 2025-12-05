@@ -40,55 +40,53 @@ public class ProdutoController {
     }
 
     public boolean salvarOuAtualizar(int indice, String tipo, String codigo, String descricao, 
-                                     String precoStr, String estoqueStr, String estoqueMinStr, 
-                                     String aroStr, String material, String tamanhoQuadro) {
-        try {
-            double preco = Double.parseDouble(precoStr.replace("R$", "").replace(",", ".").trim());
-            int estoque = Integer.parseInt(estoqueStr);
-            int estoqueMin = Integer.parseInt(estoqueMinStr);
-            
-            Produto novoProduto;
-            
-            if (tipo.equals("Bicicleta")) {
-                int aro = 0;
-                try { aro = Integer.parseInt(aroStr); } catch (Exception e) {}
-                
-                // Bicicleta já tinha material, mantém igual
-                novoProduto = new Bicicleta(codigo, descricao, preco, estoqueMin, "Padrão", aro, material, tamanhoQuadro);
-            } else {
-                // É UMA PEÇA (Quadro, Roda, etc)
-                String medidaParaSalvar = "";
-                String materialParaSalvar = ""; 
-
-                if (tipo.equals("Quadro")) {
-                    medidaParaSalvar = tamanhoQuadro;
-                    materialParaSalvar = material; // PEGA O MATERIAL DA TELA
-                } else if (tipo.equals("Roda")) {
-                    medidaParaSalvar = aroStr;
-                    materialParaSalvar = ""; // Roda não tem material definido no requisito
-                } else {
-                    // Outras peças
-                    medidaParaSalvar = tamanhoQuadro; 
-                }
-
-                // Cria a peça passando o material agora
-                novoProduto = new Peca(codigo, descricao, preco, estoqueMin, tipo, medidaParaSalvar, materialParaSalvar);
-            }
-            
-            novoProduto.setEstoqueAtual(estoque);
-            
-            if (indice == -1) {
-                produtos.add(novoProduto);
-            } else {
-                produtos.set(indice, novoProduto);
-            }
-            
-            GerenciadorDados.salvar(produtos, ARQUIVO_PRODUTOS);
-            return true;
-            
-        } catch (NumberFormatException e) {
-            System.out.println("Erro numérico: " + e.getMessage());
-            return false;
-        }
-    }
+            		String precoStr, String estoqueStr, String estoqueMinStr, 
+            		String aroStr, String material, String tamanhoQuadro,
+            		String faixaEtaria, String finalidade) { // NOVOS PARAMETROS
+			try {
+				double preco = Double.parseDouble(precoStr.replace("R$", "").replace(",", ".").trim());
+				int estoque = Integer.parseInt(estoqueStr);
+				int estoqueMin = Integer.parseInt(estoqueMinStr);
+				
+				Produto novoProduto;
+			
+			if (tipo.equals("Bicicleta")) {
+				int aro = 0;
+				try { aro = Integer.parseInt(aroStr); } catch (Exception e) {}
+				
+				// Passando os novos dados para o construtor
+				novoProduto = new Bicicleta(codigo, descricao, preco, estoqueMin, aro, material, tamanhoQuadro, faixaEtaria, finalidade);
+			} else {
+				// Peças continuam iguais (passamos null ou string vazia para o que não usam)
+				String medidaParaSalvar = "";
+				String materialParaSalvar = ""; 
+				
+				if (tipo.equals("Quadro")) {
+				medidaParaSalvar = tamanhoQuadro;
+				materialParaSalvar = material;
+				} else if (tipo.equals("Roda")) {
+				medidaParaSalvar = aroStr;
+				} else {
+				medidaParaSalvar = tamanhoQuadro; 
+				}
+				
+				novoProduto = new Peca(codigo, descricao, preco, estoqueMin, tipo, medidaParaSalvar, materialParaSalvar);
+			}
+			
+			novoProduto.setEstoqueAtual(estoque);
+			
+			if (indice == -1) {
+				produtos.add(novoProduto);
+			} else {
+				produtos.set(indice, novoProduto);
+			}
+			
+			GerenciadorDados.salvar(produtos, ARQUIVO_PRODUTOS);
+			return true;
+			
+		} catch (NumberFormatException e) {
+			System.out.println("Erro numérico: " + e.getMessage());
+			return false;
+		}
+	}
 }

@@ -44,12 +44,7 @@ public class VendaController {
         return null;
     }
 
-    public Venda realizarVenda(Cliente cliente, Produto produtoSelecionado, int qtd, String data) {
-        // ... (Mantenha o código de realizarVenda igual ao que já fizemos) ...
-        // Vou omitir aqui para economizar espaço, mas mantenha a lógica de baixar estoque e salvar
-        
-        // Copie a lógica do passo anterior aqui dentro
-        // ...
+public Venda realizarVenda(Cliente cliente, Produto produtoSelecionado, int qtd, String data, String metodoPagamento) {
         
         Produto produtoEstoque = null;
         for (Produto p : produtos) {
@@ -58,15 +53,28 @@ public class VendaController {
                 break;
             }
         }
+
         if (produtoEstoque == null) return null;
-        if (produtoEstoque.getEstoqueAtual() < qtd) throw new IllegalArgumentException("Estoque insuficiente!");
+
+        // Verifica se tem estoque suficiente
+        if (produtoEstoque.getEstoqueAtual() < qtd) {
+            throw new IllegalArgumentException("Estoque insuficiente! Disponível: " + produtoEstoque.getEstoqueAtual());
+        }
         
+        // Baixa no estoque
         produtoEstoque.setEstoqueAtual(produtoEstoque.getEstoqueAtual() - qtd);
-        Venda novaVenda = new Venda(cliente, produtoEstoque, qtd, data);
+        
+        // Cria a venda passando o método de pagamento
+        // (Certifique-se que o construtor da classe Venda.java já recebe esses 5 parâmetros)
+        Venda novaVenda = new Venda(cliente, produtoEstoque, qtd, data, metodoPagamento);
+        
         this.vendas.add(novaVenda);
         
+        // Salva nos arquivos
         GerenciadorDados.salvar(this.produtos, ARQUIVO_PRODUTOS);
         GerenciadorDados.salvar(this.vendas, ARQUIVO_VENDAS);
+        
+        // Gera o comprovante txt
         salvarComprovanteEmArquivo(novaVenda);
         
         return novaVenda;

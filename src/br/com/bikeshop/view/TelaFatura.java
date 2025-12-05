@@ -8,7 +8,7 @@ public class TelaFatura extends JDialog {
 
     public TelaFatura(Frame parent, Venda venda) {
         super(parent, "Comprovante de Venda", true);
-        setSize(400, 500);
+        setSize(400, 700);
         setLocationRelativeTo(parent);
         setLayout(new BorderLayout());
 
@@ -34,6 +34,14 @@ public class TelaFatura extends JDialog {
         addLabel(painel, "PRODUTO:", new Font("Monospaced", Font.BOLD, 14));
         addLabel(painel, venda.getProduto().getDescricao(), fonteCupom);
         addLabel(painel, "QTD: " + venda.getQuantidade(), fonteCupom);
+        
+     // Mostra Pagamento
+        addLabel(painel, "PAGAMENTO: " + venda.getMetodoPagamento(), fonteCupom);
+        if ("Pix".equalsIgnoreCase(venda.getMetodoPagamento())) {
+            addLabel(painel, "(Desconto de 10% aplicado)", new Font("Monospaced", Font.ITALIC, 12));
+        }
+
+        addLabel(painel, "--------------------------------", fonteCupom);
         addLabel(painel, String.format("TOTAL: R$ %.2f", venda.getValorTotal()), new Font("Monospaced", Font.BOLD, 18));
         addLabel(painel, "--------------------------------", fonteCupom);
         addLabel(painel, " ", fonteCupom);
