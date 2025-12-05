@@ -18,11 +18,11 @@ O sistema consiste em uma aplicação Desktop em **Java Swing** para o gerenciam
 
 | Tela Inicial | Gestão de Estoque |
 |:---:|:---:|
-| <img src="/imagens/print_home.png" width="400"> | <img src="/imagens/print_estoque.png" width="400"> |
+| <img src="src/imagens/print_home.png" width="400"> | <img src="src/imagens/print_estoque.png" width="400"> |
 
 | Nova Venda | Comprovante Fiscal |
 |:---:|:---:|
-| <img src="/imagens/print_venda.png" width="400"> | <img src="/imagens/print_fatura.png" width="400"> |
+| <img src="src/imagens/print_venda.png" width="400"> | <img src="src/imagens/print_fatura.png" width="400"> |
 
 ---
 
