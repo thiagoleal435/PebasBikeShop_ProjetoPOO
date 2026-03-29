@@ -2,10 +2,9 @@
 
 > "Qualidade, Performance e estilo Peba de ser."
 
-![Java](https://skillicons.dev/icons?i=java)](https://skillicons.dev)
-![Eclipse](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
-![Swing](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
-
+![Java](https://skillicons.dev/icons?i=java)
+![Eclipse](https://skillicons.dev/icons?i=eclipse)
+![Swing](https://skillicons.dev/icons?i=swing)
 ## 📖 Sobre o Projeto
 
 Este projeto foi desenvolvido como requisito avaliativo para a disciplina de **Programação Orientada a Objetos (POO)**. 
